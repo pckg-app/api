@@ -1,4 +1,14 @@
 {
+    "name": "pckg-app/api",
+    "description": "Core api for pckg apps",
+    "homepage": "https://github.com/pckg-app/api",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bojan Rajh",
+            "email": "schtr4jh@schtr4jh.net"
+        }
+    ],
     "require": {
         "guzzlehttp/guzzle": "^6.3",
         "pckg/database": "dev-master"
