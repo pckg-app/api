@@ -3,13 +3,19 @@
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise\Promise;
 
-class Api
+abstract class Api
 {
 
     /**
      * @var Promise
      */
     protected $response;
+
+    protected $endpoint;
+
+    protected $apiKey;
+
+    protected $requestOptions;
 
     public function getApiResponse($key = null, $default = [])
     {
@@ -37,21 +43,11 @@ class Api
         $client = new Client();
         $this->response = $client->request(
             $type,
-            $this->getRequestEndpoint() . $url,
-            array_merge($this->getRequestOptions(), $data)
+            $this->endpoint . $url,
+            array_merge($this->requestOptions, $data)
         );
 
         return $this;
-    }
-
-    protected function getRequestEndpoint()
-    {
-        return '';
-    }
-
-    protected function getRequestOptions()
-    {
-        return [];
     }
 
 }
