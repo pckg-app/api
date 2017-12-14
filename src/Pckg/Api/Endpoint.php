@@ -31,9 +31,22 @@ class Endpoint implements ArrayAccess
 
     public function create($data = [])
     {
-        $this->api->postApi($this->path, $data);
+        return $this->postAndDataResponse($data, $this->path, $this->path);
+    }
 
-        $this->data = new Object($this->api->getApiResponse($this->path));
+    protected function postAndDataResponse($data = [], $path = null, $key = null)
+    {
+        if (!$path) {
+            $path = $this->path;
+        }
+
+        if (!$key) {
+            $key = $path;
+        }
+        
+        $this->api->postApi($path, $data);
+
+        $this->data = new Object($this->api->getApiResponse($key));
 
         return $this;
     }
