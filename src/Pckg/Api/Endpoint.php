@@ -34,7 +34,7 @@ class Endpoint implements ArrayAccess
         return $this->postAndDataResponse($data, $this->path, $this->path);
     }
 
-    protected function postAndDataResponse($data = [], $path = null, $key = null)
+    protected function postAndDataResponse($data = [], $path = null, $key = null, $options = [])
     {
         if (!$path) {
             $path = $this->path;
@@ -44,7 +44,7 @@ class Endpoint implements ArrayAccess
             $key = $path;
         }
         
-        $this->api->postApi($path, $data);
+        $this->api->postApi($path, $data, $options);
 
         $this->data = new Object($this->api->getApiResponse($key));
 
