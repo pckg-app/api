@@ -13,5 +13,10 @@
         "guzzlehttp/guzzle": "^6.3",
         "pckg/database": "dev-master"
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-0": {
+            "Pckg": "src\\"
+        }
+    }
 }
