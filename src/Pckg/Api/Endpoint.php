@@ -29,6 +29,11 @@ class Endpoint implements ArrayAccess
         return $this->data->data();
     }
 
+    /**
+     * @param array $data
+     *
+     * @return Endpoint|$this
+     */
     public function create($data = [])
     {
         return $this->postAndDataResponse($data, $this->path, $this->path);
