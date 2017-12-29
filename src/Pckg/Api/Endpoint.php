@@ -48,10 +48,29 @@ class Endpoint implements ArrayAccess
         if (!$key) {
             $key = $path;
         }
-        
+
         $this->api->postApi($path, $data, $options);
 
         $this->data = new Object($this->api->getApiResponse($key));
+
+        return $this;
+    }
+
+    protected function getAndDataResponse($path = null, $key = null, $options = [])
+    {
+        if (!$path) {
+            $path = $this->path;
+        }
+
+        if (!$key) {
+            $key = $path;
+        }
+
+        $this->api->getApi($path, $options);
+
+        if ($key) {
+            $this->data = new Object($this->api->getApiResponse($key));
+        }
 
         return $this;
     }

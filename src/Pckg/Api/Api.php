@@ -33,9 +33,9 @@ abstract class Api
         return $this->request('POST', $url, array_merge(['form_params' => $data], $options));
     }
 
-    public function getApi($url, $data = [])
+    public function getApi($url, $options = [])
     {
-        return $this->request('GET', $url);
+        return $this->request('GET', $url, $options);
     }
 
     protected function request($type, $url, $data = [])
