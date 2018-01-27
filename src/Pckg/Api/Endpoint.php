@@ -1,7 +1,7 @@
 <?php namespace Pckg\Api;
 
 use ArrayAccess;
-use Pckg\Database\Object;
+use Pckg\Database\Obj;
 
 class Endpoint implements ArrayAccess
 {
@@ -21,7 +21,7 @@ class Endpoint implements ArrayAccess
     public function __construct(Api $api = null, $data = [])
     {
         $this->api = $api;
-        $this->data = is_object($data) ? $data : new Object($data);
+        $this->data = is_object($data) ? $data : new Obj($data);
     }
 
     public function data()
@@ -51,7 +51,7 @@ class Endpoint implements ArrayAccess
 
         $this->api->postApi($path, $data, $options);
 
-        $this->data = new Object($this->api->getApiResponse($key));
+        $this->data = new Obj($this->api->getApiResponse($key));
 
         return $this;
     }
@@ -69,7 +69,7 @@ class Endpoint implements ArrayAccess
         $this->api->getApi($path, $options);
 
         if ($key) {
-            $this->data = new Object($this->api->getApiResponse($key));
+            $this->data = new Obj($this->api->getApiResponse($key));
         }
 
         return $this;
