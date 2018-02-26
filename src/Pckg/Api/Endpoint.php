@@ -3,7 +3,7 @@
 use ArrayAccess;
 use Pckg\Database\Obj;
 
-class Endpoint implements ArrayAccess
+class Endpoint implements ArrayAccess, \JsonSerializable
 {
 
     /**
@@ -102,6 +102,11 @@ class Endpoint implements ArrayAccess
     public function __get($key)
     {
         return $this->data[$key] ?? null;
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->data;
     }
 
 }

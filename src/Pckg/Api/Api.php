@@ -2,6 +2,7 @@
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise\Promise;
+use GuzzleHttp\Psr7\Response;
 
 abstract class Api
 {
@@ -26,6 +27,14 @@ abstract class Api
         }
 
         return $decoded ?? $default;
+    }
+
+    /**
+     * @return Promise|Response
+     */
+    public function getResponse()
+    {
+        return $this->response;
     }
 
     public function postApi($url, $data = [], $options = [])
