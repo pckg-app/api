@@ -47,6 +47,11 @@ abstract class Api
         return $this->request('GET', $url, $options);
     }
 
+    public function deleteApi($url, $options = [])
+    {
+        return $this->request('DELETE', $url, $options);
+    }
+
     protected function request($type, $url, $data = [])
     {
         $client = new Client();
