@@ -2,7 +2,6 @@
 
 use Pckg\Api\Record\AppKey;
 use Pckg\Database\Entity;
-use Pckg\Mailo\Entity\Apps;
 
 class AppKeys extends Entity
 {
