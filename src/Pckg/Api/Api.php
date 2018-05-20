@@ -18,8 +18,13 @@ abstract class Api
 
     protected $requestOptions;
 
+    protected $client;
+
     public function getApiResponse($key = null, $default = [])
     {
+        if (!$this->response) {
+            return null;
+        }
         $decoded = json_decode($this->response->getBody(), true);
 
         if ($key) {
@@ -54,14 +59,22 @@ abstract class Api
 
     protected function request($type, $url, $data = [])
     {
-        $client = new Client();
-        $this->response = $client->request(
+        $this->client = new Client();
+        $this->response = $this->client->request(
             $type,
             $this->endpoint . $url,
             array_merge($this->requestOptions, $data)
         );
 
         return $this;
+    }
+
+    /**
+     * @return Client
+     */
+    public function getClient()
+    {
+        return $this->client;
     }
 
 }
