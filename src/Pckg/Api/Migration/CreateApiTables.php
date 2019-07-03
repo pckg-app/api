@@ -14,7 +14,8 @@ class CreateApiTables extends Migration
         $appKeys = $this->table('app_keys');
         $appKeys->integer('app_id')->references('apps');
         $appKeys->boolean('valid');
-        $appKeys->varchar('key', 128);
+        $appKeys->varchar('key');
+        $appKeys->varchar('secret');
 
         $this->save();
     }
