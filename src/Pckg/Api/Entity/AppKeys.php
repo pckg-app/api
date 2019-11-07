@@ -8,9 +8,11 @@ class AppKeys extends Entity
 
     protected $record = AppKey::class;
 
+    protected $appsEntity = Apps::class;
+
     public function app()
     {
-        return $this->belongsTo(Apps::class)
+        return $this->belongsTo($this->appsEntity)
                     ->foreignKey('app_id');
     }
 

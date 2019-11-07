@@ -1,5 +1,6 @@
 <?php namespace Pckg\Api\Resolver;
 
+use Pckg\Api\Record\AppKey;
 use Pckg\Api\Record\AppKey as AppKeyRecord;
 use Pckg\Framework\Provider\RouteResolver;
 
@@ -13,9 +14,12 @@ class ApiKey implements RouteResolver
      */
     public function resolve($value)
     {
-        $apiKey = request()->header($this->header ?? 'X-Api-Key');
+        return AppKey::getOrFail(['key' => $value ?? $this->fetchValue(), 'valid' => true]);
+    }
 
-        return AppKeyRecord::getOrFail(['key' => $apiKey, 'valid' => true]);
+    public function fetchValue()
+    {
+        return request()->header($this->header ?? 'X-Api-Key');
     }
 
     /**
