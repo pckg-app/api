@@ -8,7 +8,7 @@ abstract class Api
 {
 
     /**
-     * @var Promise
+     * @var Promise|Response
      */
     protected $response;
 
@@ -25,7 +25,8 @@ abstract class Api
         if (!$this->response) {
             return null;
         }
-        $decoded = json_decode($this->response->getBody(), true);
+
+        $decoded = json_decode($this->response->getBody()->getContents(), true);
 
         if ($key) {
             return $decoded[$key] ?? $default;
