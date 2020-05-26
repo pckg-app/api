@@ -20,13 +20,15 @@ abstract class Api
 
     protected $client;
 
+    protected $content;
+
     public function getApiResponse($key = null, $default = [])
     {
         if (!$this->response) {
             return null;
         }
 
-        $decoded = json_decode($this->response->getBody()->getContents(), true);
+        $decoded = json_decode($this->content, true);
 
         if ($key) {
             return $decoded[$key] ?? $default;
@@ -66,6 +68,7 @@ abstract class Api
             $this->endpoint . $url,
             array_merge($this->requestOptions, $data)
         );
+        $this->content = $this->response->getBody()->getContents();
 
         return $this;
     }
