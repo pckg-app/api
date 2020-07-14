@@ -2,6 +2,8 @@
 
 use ArrayAccess;
 use Pckg\Database\Obj;
+use Pckg\Database\Query;
+use Pckg\Database\Query\Select;
 
 class Endpoint implements ArrayAccess, \JsonSerializable
 {
@@ -18,15 +20,44 @@ class Endpoint implements ArrayAccess, \JsonSerializable
 
     protected $path;
 
+    /**
+     * @var Select|Query
+     */
+    protected $query;
+
     public function __construct(Api $api = null, $data = [])
     {
         $this->api = $api;
         $this->data = is_object($data) ? $data : new Obj($data);
     }
 
+    /**
+     * @return Api|null
+     */
+    public function getApi()
+    {
+        return $this->api;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
     public function data()
     {
         return $this->data->data();
+    }
+
+    /**
+     * @return array
+     */
+    public function getCreateDefaults()
+    {
+        return [];
     }
 
     /**
@@ -36,7 +67,12 @@ class Endpoint implements ArrayAccess, \JsonSerializable
      */
     public function create($data = [])
     {
-        return $this->postAndDataResponse($data, $this->path, $this->path);
+        return $this->postAndDataResponse(array_merge($this->getCreateDefaults(), $data), $this->path, $this->path);
+    }
+
+    public function all()
+    {
+        return $this->getAndDataResponse($this->path, $this->path);
     }
 
     protected function postAndDataResponse($data = [], $path = null, $key = null, $options = [])
@@ -89,7 +125,7 @@ class Endpoint implements ArrayAccess, \JsonSerializable
 
     public function offsetUnset($offset)
     {
-        unset($this->data[$offset]);
+        unset($this->data->{$offset});
 
         return $this;
     }
@@ -101,7 +137,7 @@ class Endpoint implements ArrayAccess, \JsonSerializable
 
     public function __get($key)
     {
-        return $this->data[$key] ?? null;
+        return $this->data->{$key} ?? null;
     }
 
     public function jsonSerialize()

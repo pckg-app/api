@@ -3,6 +3,7 @@
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\RequestOptions;
 
 abstract class Api
 {
@@ -63,14 +64,37 @@ abstract class Api
     public function request($type, $url, $data = [])
     {
         $this->client = new Client();
+        $this->content = null;
+
+        /**
+         * Set default request options.
+         * Because we do not throw exception on http errors
+         */
+        $requestOptions = array_merge(array_merge([
+            // RequestOptions::HTTP_ERRORS => false,
+        ], $this->requestOptions), $data);
+
+        /**
+         * Save response.
+         */
         $this->response = $this->client->request(
             $type,
             $this->endpoint . $url,
-            array_merge($this->requestOptions, $data)
+            $requestOptions
         );
+
+        /**
+         * Parse content.
+         * (and code?)
+         */
         $this->content = $this->response->getBody()->getContents();
 
         return $this;
+    }
+
+    public function getContent()
+    {
+        return $this->content;
     }
 
     /**
