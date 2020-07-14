@@ -31,7 +31,7 @@ abstract class Api
         $decoded = json_decode($this->content, true);
 
         if ($key) {
-            return $decoded[$key] ?? $default;
+            return $key === true ? $decoded : ($decoded[$key] ?? $default);
         }
 
         return $decoded ?? $default;
