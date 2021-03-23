@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "guzzlehttp/guzzle": ">=6.5",
+        "guzzlehttp/guzzle": "^6.0 || ^7.0",
         "pckg/database": "dev-master"
     },
     "minimum-stability": "dev",
