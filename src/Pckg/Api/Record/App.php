@@ -8,4 +8,6 @@ class App extends Record
 
     protected $entity = Apps::class;
 
+    protected $toArray = ['appKeys'];
+
 }
