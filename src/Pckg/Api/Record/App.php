@@ -10,4 +10,13 @@ class App extends Record
 
     protected $toArray = ['appKeys'];
 
+    public function generateApiKey()
+    {
+        return AppKey::create([
+            'app_id' => $this->id,
+            'valid' => true,
+            'key' => randomKey(),
+            'secret' => randomKey(),
+        ]);
+    }
 }

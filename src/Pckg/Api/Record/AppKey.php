@@ -8,6 +8,8 @@ use Pckg\Database\Record;
  *
  * @package Pckg\Api\Record
  * @property \Pckg\Mailo\Record\App app
+ * @property $secret string
+ * @property $key string
  */
 class AppKey extends Record
 {
