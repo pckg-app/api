@@ -23,6 +23,23 @@ abstract class Api
 
     protected $content;
 
+    const API_KEY_HEADER = 'X-API-Key';
+
+    public function setEndpoint(string $endpoint): self
+    {
+        $this->endpoint = $endpoint;
+
+        return $this;
+    }
+
+    public function setApiKey(?string $apiKey): self
+    {
+        $this->apiKey = $apiKey;
+        $this->requestOptions[RequestOptions::HEADERS][static::API_KEY_HEADER] = $apiKey;
+
+        return $this;
+    }
+
     public function getApiResponse($key = null, $default = [])
     {
         if (!$this->response) {
