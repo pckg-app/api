@@ -201,7 +201,7 @@ class Query
      * @param array $default
      * @return array
      */
-    protected function getRequestOptions($default = [])
+    public function getRequestOptions($default = [])
     {
         return array_merge([
             'X-Pckg-Orm-Meta' => [], // additional data, for relations
