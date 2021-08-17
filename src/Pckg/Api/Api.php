@@ -96,7 +96,7 @@ abstract class Api
          */
         $this->response = $this->client->request(
             $type,
-            $this->endpoint . $url,
+            (substr($url, 0, 1) === '/' ? str_replace('/api/', '', $this->endpoint) : $this->endpoint) . $url,
             $requestOptions
         );
 
