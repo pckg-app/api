@@ -94,9 +94,10 @@ abstract class Api
         /**
          * Save response.
          */
+        $finalUrl = (substr($url, 0, 1) === '/' ? str_replace('/api/', '', $this->endpoint) : $this->endpoint) . $url;
         $this->response = $this->client->request(
             $type,
-            (substr($url, 0, 1) === '/' ? str_replace('/api/', '', $this->endpoint) : $this->endpoint) . $url,
+            $finalUrl,
             $requestOptions
         );
 
