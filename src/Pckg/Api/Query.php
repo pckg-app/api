@@ -1,5 +1,6 @@
 <?php namespace Pckg\Api;
 
+use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\RequestOptions;
 use Pckg\Framework\Helper\TryCatch;
 
@@ -204,10 +205,10 @@ class Query
     public function getRequestOptions($default = [])
     {
         return array_merge([
-            'X-Pckg-Orm-Meta' => [], // additional data, for relations
-            'X-Pckg-Orm-Search' => [], // full-text search
+            'X-Pckg-Orm-Meta' => json_encode([]), // additional data, for relations
+            'X-Pckg-Orm-Search' => json_encode(null), // full-text search
             'X-Pckg-Orm-Filters' => json_encode($this->where), // no by default
-            'X-Pckg-Orm-Fields' => [], // all non-computable by default
+            'X-Pckg-Orm-Fields' => json_encode([]), // all non-computable by default
             'X-Pckg-Orm-Paginator' => json_encode([
                 'page' => $this->page ?? 1,
                 'limit' => $this->limit ?? 50,
@@ -225,18 +226,11 @@ class Query
         $endpoint = $this->endpoint;
         $api = $endpoint->getApi();
 
+        $json = array_merge($this->getRequestOptions([
+            'X-Pckg-Orm-Action' => 'insert',
+        ]), $this->set);
         $api->request('PUT', 'http-ql?path=' . $endpoint->getPath(), [
-            RequestOptions::JSON => array_merge([
-                'X-Pckg-Orm-Action' => 'insert',
-                'X-Pckg-Orm-Meta' => [], // additional data, for relations
-                'X-Pckg-Orm-Search' => [], // full-text search
-                'X-Pckg-Orm-Filters' => json_encode($this->where), // no by default
-                'X-Pckg-Orm-Fields' => [], // all non-computable by default
-                'X-Pckg-Orm-Paginator' => json_encode([
-                    'sort' => $this->sort ?? null, // id
-                    'dir' => $this->sortDirection ?? null, // DESC
-                ]),
-            ], $this->set),
+            RequestOptions::JSON => $json,
         ]);
         $data = json_decode($api->getContent());
 
@@ -258,17 +252,9 @@ class Query
         $api = $endpoint->getApi();
 
         $api->request('PATCH', 'http-ql?path=' . $endpoint->getPath(), [
-            RequestOptions::JSON => [
+            RequestOptions::JSON => $this->getRequestOptions([
                 'X-Pckg-Orm-Action' => 'update',
-                'X-Pckg-Orm-Meta' => [], // additional data, for relations
-                'X-Pckg-Orm-Search' => [], // full-text search
-                'X-Pckg-Orm-Filters' => json_encode($this->where), // no by default
-                'X-Pckg-Orm-Fields' => [], // all non-computable by default
-                'X-Pckg-Orm-Paginator' => json_encode([
-                    'sort' => $this->sort ?? null, // id
-                    'dir' => $this->sortDirection ?? null, // DESC
-                ]),
-            ],
+            ]),
         ]);
         $data = json_decode($api->getContent());
 
@@ -284,16 +270,9 @@ class Query
         $api = $endpoint->getApi();
 
         $api->request('DELETE', 'http-ql?path=' . $endpoint->getPath(), [
-            RequestOptions::JSON => [
+            RequestOptions::JSON => $this->getRequestOptions([
                 'X-Pckg-Orm-Action' => 'deleteOne?',
-                'X-Pckg-Orm-Meta' => [], // additional data, for relations
-                'X-Pckg-Orm-Search' => [], // full-text search
-                'X-Pckg-Orm-Filters' => json_encode($this->where), // no by default
-                'X-Pckg-Orm-Paginator' => json_encode([
-                    'sort' => $this->sort ?? null, // id
-                    'dir' => $this->sortDirection ?? null, // DESC
-                ]),
-            ],
+            ]),
         ]);
         $data = json_decode($api->getContent());
 

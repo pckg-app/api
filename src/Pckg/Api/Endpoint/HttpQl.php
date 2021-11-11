@@ -110,7 +110,7 @@ trait HttpQl
      */
     public function upload(string $field, string $source, string $destination = null)
     {
-        $this->api->request('POST', 'http-ql?path=' . $this->path . '&record=' . $this->id . '&field=' . $field, [
+        $this->api->request('POST', 'http-ql/upload?path=' . $this->path . '&record=' . $this->id . '&field=' . $field, [
             'multipart' => [
                 [
                     'name' => 'file',

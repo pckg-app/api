@@ -28,7 +28,7 @@ class Endpoint implements ArrayAccess, \JsonSerializable
     public function __construct(Api $api = null, $data = [])
     {
         $this->api = $api;
-        $this->data = is_object($data) ? $data : new Obj($data);
+        $this->data = is_object($data) && $data instanceof Obj ? $data : new Obj($data ? (array)$data : []);
     }
 
     /**
