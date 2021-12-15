@@ -24,9 +24,9 @@ class LogRequests
 
     public function shouldLog()
     {
-        $urls = config('pckg-app.api.log.request.includes', []);
+        $urls = config('pckg-app.api.log.request.include', []);
 
-        return collect($urls)->has(fn($url) => strpos($url, $this->request->url()) === 0);
+        return collect($urls)->has(fn($url) => strpos($this->request->url(), $url) === 0);
     }
 
     public function logRequest()
