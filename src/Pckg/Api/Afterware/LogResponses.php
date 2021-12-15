@@ -28,9 +28,9 @@ class LogResponses
 
     public function shouldLog()
     {
-        $urls = config('pckg-app.api.log.response.includes', []);
+        $urls = config('pckg-app.api.log.response.include', []);
 
-        return collect($urls)->has(fn($url) => strpos($url, $this->request->url()) === 0);
+        return collect($urls)->has(fn($url) => strpos($this->request->url(), $url) === 0);
     }
 
     public function logResponse()
