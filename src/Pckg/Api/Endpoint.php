@@ -140,7 +140,7 @@ class Endpoint implements ArrayAccess, \JsonSerializable
         return $this->data->{$key} ?? null;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return $this->data;
     }
