@@ -1,4 +1,6 @@
-<?php namespace Pckg\Api;
+<?php
+
+namespace Pckg\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise\Promise;
@@ -7,10 +9,6 @@ use GuzzleHttp\RequestOptions;
 
 abstract class Api
 {
-
-    /**
-     * @var Promise|Response
-     */
     protected $response;
 
     protected $endpoint;
@@ -122,5 +120,4 @@ abstract class Api
     {
         return $this->client;
     }
-
 }

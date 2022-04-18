@@ -1,4 +1,6 @@
-<?php namespace Pckg\Api\Afterware;
+<?php
+
+namespace Pckg\Api\Afterware;
 
 use Pckg\Api\Record\ApiLog;
 use Pckg\Api\Record\RequestLog;

@@ -1,4 +1,6 @@
-<?php namespace Pckg\Api;
+<?php
+
+namespace Pckg\Api;
 
 use ArrayAccess;
 use Pckg\Database\Obj;
@@ -7,7 +9,6 @@ use Pckg\Database\Query\Select;
 
 class Endpoint implements ArrayAccess, \JsonSerializable
 {
-
     /**
      * @var Api
      */
@@ -114,8 +115,6 @@ class Endpoint implements ArrayAccess, \JsonSerializable
     public function offsetSet($offset, $value)
     {
         $this->data[$offset] = $value;
-
-        return $this;
     }
 
     public function offsetExists($offset)
@@ -126,8 +125,6 @@ class Endpoint implements ArrayAccess, \JsonSerializable
     public function offsetUnset($offset)
     {
         unset($this->data->{$offset});
-
-        return $this;
     }
 
     public function offsetGet($offset)
@@ -144,5 +141,4 @@ class Endpoint implements ArrayAccess, \JsonSerializable
     {
         return $this->data;
     }
-
 }

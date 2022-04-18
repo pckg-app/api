@@ -1,15 +1,16 @@
-<?php namespace Pckg\Api\Resolver;
+<?php
+
+namespace Pckg\Api\Resolver;
 
 use Pckg\Api\Record\AppKey;
-use Pckg\Api\Record\AppKey as AppKeyRecord;
 use Pckg\Framework\Provider\RouteResolver;
 
+/**
+ * @property ?string $header
+ */
 class ApiKey implements RouteResolver
 {
-
     /**
-     * @param $value
-     *
      * @return mixed|\Pckg\Database\Record
      */
     public function resolve($value)
@@ -23,13 +24,10 @@ class ApiKey implements RouteResolver
     }
 
     /**
-     * @param $record
-     *
      * @return mixed
      */
     public function parametrize($record)
     {
         return $record->key;
     }
-
 }

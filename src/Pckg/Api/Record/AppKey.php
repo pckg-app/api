@@ -1,4 +1,6 @@
-<?php namespace Pckg\Api\Record;
+<?php
+
+namespace Pckg\Api\Record;
 
 use Pckg\Api\Entity\AppKeys;
 use Pckg\Database\Record;
@@ -7,13 +9,12 @@ use Pckg\Database\Record;
  * Class AppKey
  *
  * @package Pckg\Api\Record
- * @property \Pckg\Mailo\Record\App app
- * @property $secret string
- * @property $key string
+ * @property App $app
+ * @property string $secret
+ * @property string $key
  */
 class AppKey extends Record
 {
-
     protected $entity = AppKeys::class;
 
     protected $protect = ['secret'];
@@ -31,5 +32,4 @@ class AppKey extends Record
 
         return $this;
     }
-
 }

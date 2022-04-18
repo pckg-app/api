@@ -1,4 +1,6 @@
-<?php namespace Pckg\Api\Endpoint;
+<?php
+
+namespace Pckg\Api\Endpoint;
 
 use GuzzleHttp\RequestOptions;
 use Pckg\Api\Endpoint;
@@ -10,7 +12,6 @@ use Pckg\Api\Query;
  */
 trait HttpQl
 {
-
     /**
      * @var Query
      */
@@ -54,7 +55,6 @@ trait HttpQl
     }
 
     /**
-     * @param $data
      * @return $this|null
      */
     public function create($data = [])
@@ -137,5 +137,4 @@ trait HttpQl
 
         return $decoded->filename;
     }
-
 }

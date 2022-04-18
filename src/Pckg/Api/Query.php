@@ -1,4 +1,6 @@
-<?php namespace Pckg\Api;
+<?php
+
+namespace Pckg\Api;
 
 use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\RequestOptions;
@@ -6,7 +8,6 @@ use Pckg\Framework\Helper\TryCatch;
 
 class Query
 {
-
     /**
      * @var Endpoint
      */
@@ -54,7 +55,6 @@ class Query
     }
 
     /**
-     * @param $set
      * @return $this
      */
     public function set($set)
@@ -65,8 +65,6 @@ class Query
     }
 
     /**
-     * @param $key
-     * @param $value
      * @param string $comparator
      * @return $this
      */
@@ -219,7 +217,7 @@ class Query
     }
 
     /**
-     * @return |null
+     * @return mixed
      */
     public function insert()
     {
@@ -278,5 +276,4 @@ class Query
 
         return $data->success ?? false;
     }
-
 }

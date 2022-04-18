@@ -1,10 +1,11 @@
-<?php namespace Pckg\Api\Migration;
+<?php
+
+namespace Pckg\Api\Migration;
 
 use Pckg\Migration\Migration;
 
 class CreateApiTables extends Migration
 {
-
     public function up()
     {
         $apps = $this->table('apps');
@@ -18,6 +19,7 @@ class CreateApiTables extends Migration
         $appKeys->varchar('secret');
 
         $this->save();
-    }
 
+        return $this;
+    }
 }
