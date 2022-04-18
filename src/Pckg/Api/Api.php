@@ -65,7 +65,7 @@ abstract class Api
 
     public function postApi($url, $data = [], $options = [])
     {
-        return $this->request('POST', $url, array_merge(['form_params' => $data], $options));
+        return $this->request('POST', $url, !isset($options['multipart']) ? array_merge([RequestOptions::JSON => $data], $options) : $options);
     }
 
     public function getApi($url, $options = [])
