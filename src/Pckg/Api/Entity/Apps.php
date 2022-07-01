@@ -6,6 +6,9 @@ use Pckg\Api\Record\App;
 use Pckg\Auth\Entity\Users;
 use Pckg\Database\Entity;
 
+/**
+ * @method withAppKeys()
+ */
 class Apps extends Entity
 {
     protected $record = App::class;
