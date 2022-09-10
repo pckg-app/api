@@ -35,7 +35,12 @@ abstract class Api
     public function setApiKey(?string $apiKey): self
     {
         $this->apiKey = $apiKey;
-        $this->requestOptions[RequestOptions::HEADERS][static::API_KEY_HEADER] = $apiKey;
+
+        if (!$apiKey) {
+            unset($this->requestOptions[RequestOptions::HEADERS][static::API_KEY_HEADER]);
+        } else {
+            $this->requestOptions[RequestOptions::HEADERS][static::API_KEY_HEADER] = $apiKey;
+        }
 
         return $this;
     }
